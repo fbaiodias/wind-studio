@@ -1,0 +1,15 @@
+.settings {
+  font-family: Helvetica;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.text {
+  color: #788F9E;
+  font-size: 14px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+}
