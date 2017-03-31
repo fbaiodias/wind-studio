@@ -56,6 +56,8 @@
   },
   "dependencies": {
     "belle": "^2.0.3",
+    "classnames": "^2.2.5",
+    "convert-units": "^2.1.0",
     "css-box-sizing-border-box": "^0.1.0",
     "css-loader": "^0.23.0",
     "feedparser": "^1.1.5",

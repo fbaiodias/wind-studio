@@ -28,7 +28,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Dashboard',
+      title: 'New Tab',
       filename: 'new-tab.html',
       template: 'chrome/views/new-tab.html.ejs',
       chunks: ['new-tab']

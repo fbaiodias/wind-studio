@@ -1,5 +1,7 @@
 import request from 'request'
 import {parseString} from 'xml2js'
+import groupBy from 'lodash/groupBy'
+import moment from 'moment'
 
 const getWeather = (location, cb) => {
   console.log('getWeather', location)
@@ -11,12 +13,22 @@ const getWeather = (location, cb) => {
     }
 
     parseString(body, (err, result) => {
-      cb(err, mapResult(result.weatherdata))
+      const {forecast, sunrise, sunset, location} = mapResult(result.weatherdata)
+
+      const dailyWeather = groupBy(forecast, ({from}) => moment(from).format('dddd'))
+
+      cb(err, {
+        location,
+        sunrise,
+        sunset,
+        forecast: dailyWeather
+      })
     })
   })
 }
 
 const mapResult = (weatherdata) => ({
+  location: weatherdata.location[0].name[0],
   sunrise: weatherdata.sun[0].$.rise,
   sunset: weatherdata.sun[0].$.rise,
   forecast: weatherdata.forecast[0].time.map(f => ({

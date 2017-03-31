@@ -7,18 +7,29 @@ class Dashboard extends Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      weather: {}
+    }
+
     getWeather(props.location, (err, weather) => {
       console.log(weather)
       this.setState({weather})
     })
   }
   render () {
-    const {name, birthdate, salary, location} = this.props
+    const {weather: {forecast = {}, location} = {}} = this.state
     return (
       <div className={$.dashboard}>
         <div className={$.opacity}>
           <div className={$.daysWrapper}>
-            <Day />
+            {Object.keys(forecast)
+              .map(dayOfTheWeek => (
+                <Day
+                  key={dayOfTheWeek}
+                  location={location}
+                  forecast={forecast[dayOfTheWeek]}
+                />
+              ))}
           </div>
         </div>
       </div>
