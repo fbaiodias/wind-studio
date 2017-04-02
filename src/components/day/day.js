@@ -35,6 +35,7 @@ const Bar = ({location, windSpeed, windDirection, from}) => (
 
 const Day = (props) => {
   const {
+    totalDays,
     forecast,
     location
   } = props
@@ -42,7 +43,8 @@ const Day = (props) => {
   const date = moment(forecast[0].from)
 
   const className = classnames($.root, {
-    [$.isToday]: moment(date).isSame(moment(), 'day')
+    [$.isToday]: moment(date).isSame(moment(), 'day'),
+    [$.fiveDays]: totalDays === 5
   })
 
   return (
@@ -55,7 +57,7 @@ const Day = (props) => {
       </div>
 
       <div className={$.wrapper}>
-        {forecast.map(f => <Bar key={f.from} {...f} location={location} />)}
+        {forecast.sort((a, b) => moment(a.from) < moment(b.from)).map(f => <Bar key={f.from} {...f} location={location} />)}
       </div>
     </div>
   )

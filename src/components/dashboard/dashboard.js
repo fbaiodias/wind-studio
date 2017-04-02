@@ -28,6 +28,7 @@ class Dashboard extends Component {
                   key={dayOfTheWeek}
                   location={location}
                   forecast={forecast[dayOfTheWeek]}
+                  totalDays={Object.keys(forecast).length}
                 />
               ))}
           </div>
